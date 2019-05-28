@@ -47,4 +47,22 @@ app.delete('/todo/:id', (req, res) => {
   res.send(todos);
 });
 
+// 갱신
+app.put('/todo/:id', (req, res) => {
+  const { id } = req.params;
+  console.log('[PUT] req.params.id => ', req.params.id);
+
+  todos = todos.map(todo => todo.id === +id ? {...todo, completed: !todo.completed } : todo);
+  res.send(todos);
+});
+
+// 전체 일괄 갱신
+app.patch('/todo', (req, res) => {
+  const { completed } = req.body;
+  console.log('[PATCH] req.body => ', completed);
+
+  todos = todos.map(todo => ({...todo, completed }));
+  res.send(todos);
+});
+
 app.listen(9000, () => console.log('Simple Rest API Server listening on port 9000'));
