@@ -11,8 +11,6 @@ let todos = [
   { id: 1, content: 'Javascript', completed: false }
 ];
 
-const generateId = () => Math.max(...todos.map(todo => todo.id)) + 1;
-
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -24,22 +22,23 @@ app.get('/todos', (req, res) => {
   res.send(todos);
 });
 
-app.get('/todo/:id', (req, res) => {
+app.get('/todos/:id', (req, res) => {
   const { id } = req.params;
   console.log('[GET] req.params.id => ', req.params.id);
 
   res.send(todos.filter(todo => todo.id === +id));
 });
 
-app.post('/todo', (req, res) => {
-  const { content } = req.body;
-  console.log('[POST] req.body => ', content);
+app.post('/todos', (req, res) => {
+  const { id, content, completed } = req.body;
+  console.log('[POST] req.body => ', req.body);
+  console.log('[POST] req.body => ', id, content, completed);
 
-  todos = [{ id: generateId(), content, completed: false }, ...todos];
+  todos = [{ id, content, completed }, ...todos];
   res.send(todos);
 });
 
-app.delete('/todo/:id', (req, res) => {
+app.delete('/todos/:id', (req, res) => {
   const { id } = req.params;
   console.log('[DELETE] req.params.id => ', req.params.id);
 
@@ -48,7 +47,7 @@ app.delete('/todo/:id', (req, res) => {
 });
 
 // 갱신
-app.put('/todo/:id', (req, res) => {
+app.put('/todos/:id', (req, res) => {
   const { id } = req.params;
   console.log('[PUT] req.params.id => ', req.params.id);
 
@@ -57,7 +56,7 @@ app.put('/todo/:id', (req, res) => {
 });
 
 // 전체 일괄 갱신
-app.patch('/todo', (req, res) => {
+app.patch('/todos', (req, res) => {
   const { completed } = req.body;
   console.log('[PATCH] req.body => ', completed);
 
