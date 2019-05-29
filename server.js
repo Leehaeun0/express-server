@@ -52,21 +52,24 @@ app.delete('/todos/completed', (req, res) => {
   res.send(todos);
 });
 
-// 갱신
-app.put('/todos/:id', (req, res) => {
+// PATCH : 리스소의 일부를 UPDATE
+app.patch('/todos/:id', (req, res) => {
   const { id } = req.params;
-  console.log('[PUT] req.params.id => ', req.params.id);
+  console.log('[PATCH] req.params.id => ', req.params.id);
+  const { completed } = req.body;
+  console.log('[PATCH] req.body => ', completed);
 
   todos = todos.map(todo => todo.id === +id ? {...todo, completed: !todo.completed } : todo);
   res.send(todos);
 });
 
+// PATCH : 리스소의 일부를 UPDATE
 // 전체 일괄 갱신
 app.patch('/todos', (req, res) => {
   const { completed } = req.body;
   console.log('[PATCH] req.body => ', completed);
 
-  todos = todos.map(todo => ({...todo, completed }));
+  todos = todos.map(todo => ({ ...todo, completed }));
   res.send(todos);
 });
 
