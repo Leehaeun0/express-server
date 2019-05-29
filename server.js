@@ -32,7 +32,6 @@ app.get('/todos/:id', (req, res) => {
 app.post('/todos', (req, res) => {
   const { id, content, completed } = req.body;
   console.log('[POST] req.body => ', req.body);
-  console.log('[POST] req.body => ', id, content, completed);
 
   todos = [{ id, content, completed }, ...todos];
   res.send(todos);
