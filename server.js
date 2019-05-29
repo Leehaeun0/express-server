@@ -26,7 +26,8 @@ app.get('/todos/:id', (req, res) => {
   const { id } = req.params;
   console.log('[GET] req.params.id => ', req.params.id);
 
-  res.send(todos.filter(todo => todo.id === +id));
+  todos = todos.filter(todo => todo.id === +id);
+  res.send(todos);
 });
 
 app.post('/todos', (req, res) => {
