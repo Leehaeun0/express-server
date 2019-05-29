@@ -5,3 +5,5 @@ $ cd simple-rest-api-server
 ## install express
 $ npm install
 ```
+
+[demo](https://simple-rest-api-server.ungmo2.now.sh)
