@@ -37,11 +37,18 @@ app.post('/todos', (req, res) => {
   res.send(todos);
 });
 
-app.delete('/todos/:id', (req, res) => {
+app.delete('/todos/:id([0-9]+)', (req, res) => {
   const { id } = req.params;
   console.log('[DELETE] req.params.id => ', req.params.id);
 
   todos = todos.filter(todo => todo.id !== +id);
+  res.send(todos);
+});
+
+app.delete('/todos/completed', (req, res) => {
+  console.log('[DELETE] completed');
+
+  todos = todos.filter(todo => !todo.completed);
   res.send(todos);
 });
 
