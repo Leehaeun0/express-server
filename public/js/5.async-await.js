@@ -37,30 +37,30 @@ const render = () => {
 };
 
 
-const promiseAjax = (method, url, payload) => {
+// const promiseAjax = (method, url, payload) => {
 
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open(method, url);
-    xhr.setRequestHeader('content-type', 'application/json');
-    xhr.send(JSON.stringify(payload));
+//   return new Promise((resolve, reject) => {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open(method, url);
+//     xhr.setRequestHeader('content-type', 'application/json');
+//     xhr.send(JSON.stringify(payload));
 
-    xhr.onload = () => {
-      if (xhr.status === 200 || xhr.status < 400) {
+//     xhr.onload = () => {
+//       if (xhr.status === 200 || xhr.status < 400) {
 
-        resolve(JSON.parse(xhr.response));
+//         resolve(JSON.parse(xhr.response));
 
-      } else {
-        reject(new Error(xhr.status));
-      }
-    };
-  });
+//       } else {
+//         reject(new Error(xhr.status));
+//       }
+//     };
+//   });
 
-};
+// };
 
 
-const getTodos = () => {
-  promiseAjax('GET', '/todos')
+const getTodos = async () => {
+  await axios.get('/todos')
     .then(data => todos = data)
     .then(_todos => _todos.sort((todo1, todo2) => todo2.id - todo1.id))
     .then(render)
