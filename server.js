@@ -7,7 +7,7 @@ app.use(cors());
 let todos = [
   { id: 3, content: 'Javascript', completed: false },
   { id: 2, content: 'CSS', completed: true },
-  { id: 1, content: 'HTML', completed: false }
+  { id: 1, content: 'START', completed: false }
 ];
 
 app.use(express.static('public'));
